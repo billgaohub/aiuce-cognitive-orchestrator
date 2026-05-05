@@ -1,10 +1,12 @@
 # aiuce-cognitive-orchestrator
 
-Meta-cognitive scheduling engine — DAG-based task orchestration with three-system cognitive laws.
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Type](https://img.shields.io/badge/Type-Meta--Cognitive%20Scheduler-orange.svg)]()
 
-## Overview
+**Meta-cognitive scheduling engine — DAG-based task orchestration with three-system cognitive laws.**
 
-`aiuce-cognitive-orchestrator` provides a task orchestration engine for building structured, auditable cognitive pipelines. It decomposes natural-language intents into directed acyclic task graphs (DAGs), selects the optimal reasoning strategy per task, and enforces three ironclad cognitive laws at every stage.
+Decomposes natural-language intents into directed acyclic task graphs (DAGs), selects the optimal reasoning strategy per task, and enforces three ironclad cognitive laws at every stage.
 
 ## Three Cognitive Laws
 
@@ -13,25 +15,6 @@ Meta-cognitive scheduling engine — DAG-based task orchestration with three-sys
 | I | **Assumption ≠ Fact** | LWG-generated inferences carry `confidence ≤ 0.6`; they are not facts until validated |
 | II | **Cognition Must Be Compressible** | History > 10 entries → auto-summarise; pending timeout → forget or escalate |
 | III | **Context Is Budget-Constrained** | Token budget exhaustion → preserve STABLE + high-confidence nodes first |
-
-## Architecture
-
-```
-CognitiveOrchestrator
-    ├── StrategySelector   → choose reasoning strategy
-    ├── CognitiveControl   → ingest / snapshot / reasoning gates
-    ├── TaskDAG            → DAG builder + topological sort
-    └── SovereigntyGateway → optional L0 sovereignty gate
-```
-
-### Layers
-
-| Layer | Module | Responsibility |
-|-------|--------|----------------|
-| L3 | `orchestrator.py` | Main planning/execution pipeline |
-| L3 | `dag.py` | `TaskNode`, `TaskDAG`, `CognitiveNode`, `CognitiveControl` |
-| L3 | `strategy.py` | `StrategySelector`, `ReasoningStrategy` |
-| L3 | `laws.py` | `CognitiveLaws` constants |
 
 ## Installation
 
@@ -55,17 +38,14 @@ results = orchestrator.execute(dag)
 print(results)
 ```
 
-## Optional: Plug in Sovereignty Gateway
+## Architecture
 
-```python
-from aiuce_cognitive_orchestrator import CognitiveOrchestrator
-
-# When sovereignty_gateway is None (default), the gate is bypassed.
-# Pass a configured gateway to enforce L0 sovereignty checks:
-# from my_package.l0_sovereignty_gateway import SovereigntyGateway
-# orchestrator = CognitiveOrchestrator(sovereignty_gateway=SovereigntyGateway())
-
-dag = orchestrator.plan("execute action", {"token_budget": 1500})
+```
+CognitiveOrchestrator
+    ├── StrategySelector   → choose reasoning strategy
+    ├── CognitiveControl   → ingest / snapshot / reasoning gates
+    ├── TaskDAG            → DAG builder + topological sort
+    └── SovereigntyGateway → optional L0 sovereignty gate
 ```
 
 ## Reasoning Strategies
